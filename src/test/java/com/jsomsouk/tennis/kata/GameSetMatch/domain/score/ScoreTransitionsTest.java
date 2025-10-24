@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -14,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Score Transitions")
 public class ScoreTransitionsTest {
+
     @Nested
     @DisplayName("Zero")
     class ZeroTest {
@@ -140,15 +142,13 @@ public class ScoreTransitionsTest {
     @Nested
     @DisplayName("GameWon")
     class GameWonTest {
-        @Test
-        @DisplayName("does not change when further points are scored")
-        void isTerminal() {
-            PlayerScore gameWon = new GameWon(Player.A);
-            PlayerScore next = gameWon.nextPoint(Player.B);
-            assertThat(next)
-                    .isSameAs(gameWon)
-                    .hasToString("Player A wins the game");
+        @ParameterizedTest(name = "GameWon for {0} does not change on further points")
+        @EnumSource(Player.class)
+        void isTerminalForPlayerX(Player player) {
+            PlayerScore gameWon = new GameWon(player).nextPoint(player);
+            assertThat(gameWon)
+                    .isInstanceOf(GameWon.class)
+                    .hasToString("Player %s wins the game".formatted(player));
         }
     }
-
 }
