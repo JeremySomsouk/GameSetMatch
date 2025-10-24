@@ -17,34 +17,24 @@ public class Game {
         }
 
         if (winner == Player.A) {
-            playerScoreA = playerScoreA.nextPoint(winner);
-            if (playerScoreB instanceof Advantage) {
-                playerScoreB = new Deuce();
-            }
+            playerScoreA = playerScoreA.nextPoint();
+            resetOpponentAdvantage(Player.B);
         } else {
-            playerScoreB = playerScoreB.nextPoint(winner);
-            if (playerScoreA instanceof Advantage) {
-                playerScoreA = new Deuce();
-            }
+            playerScoreB = playerScoreB.nextPoint();
+            resetOpponentAdvantage(Player.A);
         }
 
-        if (playerScoreA instanceof Forty && playerScoreB instanceof Forty) {
-            playerScoreA = new Deuce();
-            playerScoreB = new Deuce();
-        }
+        handleDeuceCondition();
     }
 
     public String getCurrentScore() {
-        if (playerScoreA instanceof Deuce && playerScoreB instanceof Deuce) {
-            return playerScoreA.toString();
-        }
-        if (playerScoreA instanceof GameWon gameWonA) {
-            return gameWonA.toString();
-        } else if (playerScoreB instanceof GameWon gameWonB) {
-            return gameWonB.toString();
-        }
-
-        return "Player A: %s / Player B: %s".formatted(playerScoreA, playerScoreB);
+        return switch (playerScoreA) {
+            case Deuce ignored when playerScoreB instanceof Deuce -> "40-40";
+            case GameWon ignored -> "Player A wins the game";
+            default -> playerScoreB instanceof GameWon
+                    ? "Player B wins the game"
+                    : String.format("Player A: %s / Player B: %s", playerScoreA, playerScoreB);
+        };
     }
 
     public boolean isGameWon() {
@@ -53,11 +43,31 @@ public class Game {
     }
 
     public Player getWinner() {
-        if (playerScoreA instanceof GameWon(Player playerA)) {
-            return playerA;
-        } else if (playerScoreB instanceof GameWon(Player playerB)) {
-            return playerB;
+        if (playerScoreA instanceof GameWon) {
+            return Player.A;
+        } else if (playerScoreB instanceof GameWon) {
+            return Player.B;
         }
         return null;
+    }
+
+    private void resetOpponentAdvantage(Player opponent) {
+        final var opponentScore = (opponent == Player.A)
+                ? playerScoreA
+                : playerScoreB;
+        if (opponentScore instanceof Advantage) {
+            if (opponent == Player.A) {
+                playerScoreA = new Deuce();
+            } else {
+                playerScoreB = new Deuce();
+            }
+        }
+    }
+
+    private void handleDeuceCondition() {
+        if (playerScoreA instanceof Forty && playerScoreB instanceof Forty) {
+            playerScoreA = new Deuce();
+            playerScoreB = new Deuce();
+        }
     }
 }

@@ -1,15 +1,7 @@
 package com.jsomsouk.tennis.kata.GameSetMatch.domain.score;
 
-import com.jsomsouk.tennis.kata.GameSetMatch.domain.Player;
-
-public record GameWon(Player player) implements PlayerScore {
-    public PlayerScore nextPoint(Player pointWinner) {
-        // The game is already won; no further state changes.
+public record GameWon() implements PlayerScore {
+    public PlayerScore nextPoint() {
         return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Player %s wins the game".formatted(player);
     }
 }

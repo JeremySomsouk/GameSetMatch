@@ -1,10 +1,8 @@
 package com.jsomsouk.tennis.kata.GameSetMatch.domain.score;
 
-import com.jsomsouk.tennis.kata.GameSetMatch.domain.Player;
-
 public record Zero() implements PlayerScore {
     @Override
-    public PlayerScore nextPoint(Player pointWinner) {
+    public PlayerScore nextPoint() {
         return new Fifteen();
     }
 
