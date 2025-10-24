@@ -15,6 +15,5 @@ class PlayerScoreTest {
         assertThat(new Fifteen()).hasToString("15");
         assertThat(new Thirty()).hasToString("30");
         assertThat(new Forty()).hasToString("40");
-        assertThat(new Deuce()).hasToString("40-40");
     }
 }

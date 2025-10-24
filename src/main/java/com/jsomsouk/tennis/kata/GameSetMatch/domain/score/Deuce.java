@@ -6,9 +6,4 @@ public record Deuce() implements PlayerScore {
     public PlayerScore nextPoint() {
         return new Advantage();
     }
-
-    @Override
-    public String toString() {
-        return "40-40";
-    }
 }

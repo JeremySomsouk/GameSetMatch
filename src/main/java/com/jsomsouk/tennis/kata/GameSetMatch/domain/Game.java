@@ -16,12 +16,17 @@ public class Game {
             throw new IllegalArgumentException("Winner cannot be null");
         }
 
-        if (winner == Player.A) {
-            playerScoreA = playerScoreA.nextPoint();
-            resetOpponentAdvantage(Player.B);
+        if (hasOpponentAdvantage(winner)) {
+            // Both players go to Deuce when the opponent loses advantage
+            playerScoreA = new Deuce();
+            playerScoreB = new Deuce();
         } else {
-            playerScoreB = playerScoreB.nextPoint();
-            resetOpponentAdvantage(Player.A);
+            // Normal point progression
+            if (winner == Player.A) {
+                playerScoreA = playerScoreA.nextPoint();
+            } else {
+                playerScoreB = playerScoreB.nextPoint();
+            }
         }
 
         handleDeuceCondition();
@@ -51,23 +56,16 @@ public class Game {
         return null;
     }
 
-    private void resetOpponentAdvantage(Player opponent) {
-        final var opponentScore = (opponent == Player.A)
-                ? playerScoreA
-                : playerScoreB;
-        if (opponentScore instanceof Advantage) {
-            if (opponent == Player.A) {
-                playerScoreA = new Deuce();
-            } else {
-                playerScoreB = new Deuce();
-            }
-        }
-    }
-
     private void handleDeuceCondition() {
         if (playerScoreA instanceof Forty && playerScoreB instanceof Forty) {
             playerScoreA = new Deuce();
             playerScoreB = new Deuce();
         }
+    }
+
+    private boolean hasOpponentAdvantage(Player winner) {
+        return (winner == Player.A)
+                ? playerScoreB instanceof Advantage
+                : playerScoreA instanceof Advantage;
     }
 }
