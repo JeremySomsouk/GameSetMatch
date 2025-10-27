@@ -4,6 +4,8 @@ import com.jsomsouk.tennis.kata.GameSetMatch.application.GameService;
 import com.jsomsouk.tennis.kata.GameSetMatch.application.dto.GameDto;
 import com.jsomsouk.tennis.kata.GameSetMatch.application.dto.PlayRequest;
 import com.jsomsouk.tennis.kata.GameSetMatch.application.dto.ScoreResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -17,19 +19,20 @@ public class GameController {
     }
 
     @PostMapping
-    public GameDto createGame() {
-        return gameService.createGame();
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<GameDto> createGame() {
+        return ResponseEntity.ok(gameService.createGame());
     }
 
     @PostMapping("/{gameId}/play")
-    public ScoreResponse playBall(
+    public ResponseEntity<ScoreResponse> playBall(
             @PathVariable UUID gameId,
             @RequestBody PlayRequest request) {
-        return gameService.playBall(gameId, request.winner());
+        return ResponseEntity.ok(gameService.playBall(gameId, request.winner()));
     }
 
     @GetMapping("/{gameId}")
-    public ScoreResponse getScore(@PathVariable UUID gameId) {
-        return gameService.getScore(gameId);
+    public ResponseEntity<ScoreResponse> getScore(@PathVariable UUID gameId) {
+        return ResponseEntity.ok(gameService.getScore(gameId));
     }
 }
