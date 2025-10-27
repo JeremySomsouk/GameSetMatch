@@ -2,15 +2,21 @@ package com.jsomsouk.tennis.kata.GameSetMatch.domain;
 
 import com.jsomsouk.tennis.kata.GameSetMatch.domain.score.*;
 
-import java.util.Objects;
+import java.util.UUID;
 
 public class Game {
+    private final UUID id;
     private PlayerScore playerScoreA;
     private PlayerScore playerScoreB;
 
     public Game() {
-        this.playerScoreA = new Zero();
-        this.playerScoreB = new Zero();
+        this(UUID.randomUUID(), new Zero(), new Zero());
+    }
+
+    public Game(UUID id, PlayerScore playerScoreA, PlayerScore playerScoreB) {
+        this.id = id;
+        this.playerScoreA = playerScoreA;
+        this.playerScoreB = playerScoreB;
     }
 
     public void playBall(Player winner) {
@@ -72,5 +78,9 @@ public class Game {
         return (winner == Player.A)
                 ? playerScoreB instanceof Advantage
                 : playerScoreA instanceof Advantage;
+    }
+
+    public UUID getId() {
+        return id;
     }
 }
