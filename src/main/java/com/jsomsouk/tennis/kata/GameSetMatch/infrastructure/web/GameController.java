@@ -4,25 +4,21 @@ import com.jsomsouk.tennis.kata.GameSetMatch.application.GameService;
 import com.jsomsouk.tennis.kata.GameSetMatch.application.dto.GameDto;
 import com.jsomsouk.tennis.kata.GameSetMatch.application.dto.PlayRequest;
 import com.jsomsouk.tennis.kata.GameSetMatch.application.dto.ScoreResponse;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/games/tennis")
-@Slf4j
-@RequiredArgsConstructor
 public class GameController {
     private GameService gameService;
+    public GameController(GameService gameService) {
+        this.gameService = gameService;
+    }
 
     @PostMapping
     public GameDto createGame() {
-        final var dto = gameService.createGame();
-        log.info("Created game with ID: {} and score: {}", dto.id(), dto.score());
-        return ResponseEntity.ok(dto).getBody();
+        return gameService.createGame();
     }
 
     @PostMapping("/{gameId}/play")
