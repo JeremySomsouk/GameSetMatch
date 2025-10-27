@@ -2,6 +2,7 @@ package com.jsomsouk.tennis.kata.GameSetMatch.application;
 
 import com.jsomsouk.tennis.kata.GameSetMatch.application.dto.GameDto;
 import com.jsomsouk.tennis.kata.GameSetMatch.application.dto.ScoreResponse;
+import com.jsomsouk.tennis.kata.GameSetMatch.application.exception.GameNotFound;
 import com.jsomsouk.tennis.kata.GameSetMatch.application.ports.ScoreboardRepository;
 import com.jsomsouk.tennis.kata.GameSetMatch.domain.Game;
 import com.jsomsouk.tennis.kata.GameSetMatch.domain.Player;
@@ -25,8 +26,8 @@ public class GameService {
     }
 
     public ScoreResponse playBall(UUID gameId, Player winner) {
-        final var game = getGame(gameId).orElseThrow(() ->
-                new IllegalArgumentException("Game not found"));
+        final var game = getGame(gameId)
+                .orElseThrow(() -> new GameNotFound(gameId));
 
         game.playBall(winner);
         scoreboard.save(game);
@@ -39,7 +40,7 @@ public class GameService {
 
     public ScoreResponse getScore(UUID gameId) {
         final var game = getGame(gameId)
-                .orElseThrow(() -> new IllegalArgumentException("Game not found"));
+                .orElseThrow(() -> new GameNotFound(gameId));
 
         return new ScoreResponse(
                 game.getCurrentScore(),

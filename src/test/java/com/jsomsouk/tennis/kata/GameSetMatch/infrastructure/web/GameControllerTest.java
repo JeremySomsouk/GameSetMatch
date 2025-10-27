@@ -51,7 +51,7 @@ class GameControllerTest {
 
         // When / Then
         mockMvc.perform(post("/api/v1/games/tennis"))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(testId.toString()))
                 .andExpect(jsonPath("$.score").value("0-0"));
     }
