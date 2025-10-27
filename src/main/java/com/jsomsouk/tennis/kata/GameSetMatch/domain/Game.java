@@ -2,6 +2,8 @@ package com.jsomsouk.tennis.kata.GameSetMatch.domain;
 
 import com.jsomsouk.tennis.kata.GameSetMatch.domain.score.*;
 
+import java.util.Objects;
+
 public class Game {
     private PlayerScore playerScoreA;
     private PlayerScore playerScoreB;
@@ -16,30 +18,33 @@ public class Game {
             throw new IllegalArgumentException("Winner cannot be null");
         }
 
+        // Both players go to Deuce when the opponent loses advantage
         if (hasOpponentAdvantage(winner)) {
-            // Both players go to Deuce when the opponent loses advantage
             playerScoreA = new Deuce();
             playerScoreB = new Deuce();
-        } else {
-            // Normal point progression
-            if (winner == Player.A) {
-                playerScoreA = playerScoreA.nextPoint();
-            } else {
-                playerScoreB = playerScoreB.nextPoint();
-            }
+            return;
         }
 
+        // Normal point progression
+        if (winner == Player.A) {
+            playerScoreA = playerScoreA.nextPoint();
+        } else {
+            playerScoreB = playerScoreB.nextPoint();
+        }
         handleDeuceCondition();
     }
 
     public String getCurrentScore() {
-        return switch (playerScoreA) {
-            case Deuce ignored when playerScoreB instanceof Deuce -> "40-40";
-            case GameWon ignored -> "Player A wins the game";
-            default -> playerScoreB instanceof GameWon
-                    ? "Player B wins the game"
-                    : String.format("Player A: %s / Player B: %s", playerScoreA, playerScoreB);
-        };
+        if (playerScoreA instanceof Deuce && playerScoreB instanceof Deuce) {
+            return "40-40";
+        }
+        if (playerScoreA instanceof GameWon) {
+            return "Player A wins the game";
+        } else if (playerScoreB instanceof GameWon) {
+            return "Player B wins the game";
+        }
+
+        return "Player A: %s / Player B: %s".formatted(playerScoreA, playerScoreB);
     }
 
     public boolean isGameWon() {
