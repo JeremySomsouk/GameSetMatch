@@ -5,16 +5,18 @@ import com.jsomsouk.tennis.kata.GameSetMatch.application.dto.ScoreResponse;
 import com.jsomsouk.tennis.kata.GameSetMatch.application.ports.ScoreboardRepository;
 import com.jsomsouk.tennis.kata.GameSetMatch.domain.Game;
 import com.jsomsouk.tennis.kata.GameSetMatch.domain.Player;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class GameService {
     private final ScoreboardRepository scoreboard;
+
+    public GameService(ScoreboardRepository scoreboard) {
+        this.scoreboard = scoreboard;
+    }
 
     public GameDto createGame() {
         final var game = new Game();

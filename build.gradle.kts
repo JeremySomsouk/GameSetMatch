@@ -1,6 +1,3 @@
-import org.gradle.kotlin.dsl.annotationProcessor
-import org.gradle.kotlin.dsl.compileOnly
-
 plugins {
 	java
 	id("org.springframework.boot") version "3.5.7"
@@ -26,9 +23,6 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.kafka:spring-kafka")
-
-	compileOnly("org.projectlombok:lombok")
-	annotationProcessor("org.projectlombok:lombok")
 
 	// Test
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
