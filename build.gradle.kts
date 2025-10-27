@@ -36,3 +36,19 @@ dependencies {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+tasks.register<JavaExec>("runKata") {
+	group = "application"
+	description = "Runs the simple tennis kata implementation"
+
+	classpath = sourceSets.main.get().runtimeClasspath
+	mainClass.set("com.jsomsouk.tennis.kata.GameSetMatch.SimpleGame")
+
+	// Default argument if none provided
+	args = listOf("AABBAA")
+
+	// Allow overriding with -PkataArgs="ABABAB"
+	if (project.hasProperty("kataArgs")) {
+		args = project.property("kataArgs").toString().split(" ")
+	}
+}
