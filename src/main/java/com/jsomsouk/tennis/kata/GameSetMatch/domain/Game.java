@@ -44,10 +44,17 @@ public class Game {
         if (playerScoreA instanceof Deuce && playerScoreB instanceof Deuce) {
             return "40-40";
         }
+
         if (playerScoreA instanceof GameWon) {
             return "Player A wins the game";
         } else if (playerScoreB instanceof GameWon) {
             return "Player B wins the game";
+        }
+
+        if (playerScoreA instanceof Advantage) {
+            return "Advantage Player A";
+        } else if (playerScoreB instanceof Advantage) {
+            return "Advantage Player B";
         }
 
         return "Player A: %s / Player B: %s".formatted(playerScoreA, playerScoreB);
