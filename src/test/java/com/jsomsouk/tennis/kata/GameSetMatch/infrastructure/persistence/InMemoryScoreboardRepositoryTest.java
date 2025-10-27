@@ -4,13 +4,12 @@ import com.jsomsouk.tennis.kata.GameSetMatch.domain.Game;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@DisplayName("Cache tests")
+@DisplayName("Infrastructure - Cache tests")
 class InMemoryScoreboardRepositoryTest {
 
     private final InMemoryScoreboardRepository repository = new InMemoryScoreboardRepository();
@@ -18,12 +17,12 @@ class InMemoryScoreboardRepositoryTest {
 
     @Test
     @DisplayName("In memory cache, should save a game")
-    void shouldSaveAndRetrieveGame() {
+    void findById_shouldSaveAndRetrieveGame() {
         // Given
         repository.save(testGame);
 
         // When
-        Optional<Game> found = repository.findById(testGame.getId());
+        final var found = repository.findById(testGame.getId());
 
         // Then
         assertTrue(found.isPresent());
@@ -32,13 +31,13 @@ class InMemoryScoreboardRepositoryTest {
 
     @Test
     @DisplayName("In memory cache, should return empty when the game was not found")
-    void shouldReturnEmptyWhenGameNotFound() {
+    void findById_shouldReturnEmptyWhenGameNotFound() {
         assertTrue(repository.findById(UUID.randomUUID()).isEmpty());
     }
 
     @Test
     @DisplayName("In memory cache, should list all open games")
-    void shouldReturnAllGames() {
+    void findById_shouldReturnAllGames() {
         // When
         repository.save(testGame);
         repository.save(new Game());

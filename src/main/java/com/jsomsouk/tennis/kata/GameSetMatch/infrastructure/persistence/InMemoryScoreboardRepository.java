@@ -2,10 +2,12 @@ package com.jsomsouk.tennis.kata.GameSetMatch.infrastructure.persistence;
 
 import com.jsomsouk.tennis.kata.GameSetMatch.domain.Game;
 import com.jsomsouk.tennis.kata.GameSetMatch.application.ports.ScoreboardRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Repository
 public class InMemoryScoreboardRepository implements ScoreboardRepository {
     private final Map<UUID, Game> cache = new ConcurrentHashMap<>();
 
