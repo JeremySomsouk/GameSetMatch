@@ -7,6 +7,7 @@ import com.jsomsouk.tennis.kata.GameSetMatch.application.dto.ScoreResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.UUID;
 
@@ -21,7 +22,12 @@ public class GameController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<GameDto> createGame() {
-        return ResponseEntity.ok(gameService.createGame());
+        final var created = gameService.createGame();
+        final var location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(created.id())
+                .toUri();
+        return ResponseEntity.created(location).body(created);
     }
 
     @PostMapping("/{gameId}/play")

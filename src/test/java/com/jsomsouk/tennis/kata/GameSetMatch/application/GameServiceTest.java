@@ -2,6 +2,7 @@ package com.jsomsouk.tennis.kata.GameSetMatch.application;
 
 import com.jsomsouk.tennis.kata.GameSetMatch.application.dto.GameDto;
 import com.jsomsouk.tennis.kata.GameSetMatch.application.dto.ScoreResponse;
+import com.jsomsouk.tennis.kata.GameSetMatch.application.exception.GameNotFound;
 import com.jsomsouk.tennis.kata.GameSetMatch.application.ports.ScoreboardRepository;
 import com.jsomsouk.tennis.kata.GameSetMatch.domain.Game;
 import com.jsomsouk.tennis.kata.GameSetMatch.domain.Player;
@@ -77,8 +78,8 @@ class GameServiceTest {
 
         // When/Then
         assertThatThrownBy(() -> gameService.playBall(gameId, Player.A))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Game not found");
+                .isInstanceOf(GameNotFound.class)
+                .hasMessage("Game not found with ID: " + gameId);
     }
 
     @Test
@@ -106,8 +107,8 @@ class GameServiceTest {
 
         // When/Then
         assertThatThrownBy(() -> gameService.getScore(gameId))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Game not found");
+                .isInstanceOf(GameNotFound.class)
+                .hasMessage("Game not found with ID: " + gameId);
     }
 
     @Test
