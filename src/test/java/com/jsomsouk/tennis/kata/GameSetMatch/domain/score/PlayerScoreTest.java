@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Player Score")
+@DisplayName("Domain - Player Score")
 class PlayerScoreTest {
 
     @Test

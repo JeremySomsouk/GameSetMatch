@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Score Transitions")
+@DisplayName("Domain - Score Transitions")
 public class ScoreTransitionsTest {
 
     @Nested
