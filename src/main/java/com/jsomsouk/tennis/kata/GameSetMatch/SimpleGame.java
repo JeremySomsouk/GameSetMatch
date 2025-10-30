@@ -1,7 +1,7 @@
 package com.jsomsouk.tennis.kata.GameSetMatch;
 
 import com.jsomsouk.tennis.kata.GameSetMatch.application.GameService;
-import com.jsomsouk.tennis.kata.GameSetMatch.domain.Player;
+import com.jsomsouk.tennis.kata.GameSetMatch.domain.model.Player;
 import com.jsomsouk.tennis.kata.GameSetMatch.infrastructure.persistence.InMemoryScoreboardRepository;
 
 public class SimpleGame {

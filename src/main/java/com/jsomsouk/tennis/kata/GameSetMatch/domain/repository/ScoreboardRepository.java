@@ -1,6 +1,6 @@
-package com.jsomsouk.tennis.kata.GameSetMatch.application.ports;
+package com.jsomsouk.tennis.kata.GameSetMatch.domain.repository;
 
-import com.jsomsouk.tennis.kata.GameSetMatch.domain.Game;
+import com.jsomsouk.tennis.kata.GameSetMatch.domain.model.Game;
 
 import java.util.List;
 import java.util.Optional;
