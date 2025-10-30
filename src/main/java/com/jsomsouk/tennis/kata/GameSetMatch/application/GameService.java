@@ -3,9 +3,9 @@ package com.jsomsouk.tennis.kata.GameSetMatch.application;
 import com.jsomsouk.tennis.kata.GameSetMatch.application.dto.GameDto;
 import com.jsomsouk.tennis.kata.GameSetMatch.application.dto.ScoreResponse;
 import com.jsomsouk.tennis.kata.GameSetMatch.application.exception.GameNotFound;
-import com.jsomsouk.tennis.kata.GameSetMatch.application.ports.ScoreboardRepository;
-import com.jsomsouk.tennis.kata.GameSetMatch.domain.Game;
-import com.jsomsouk.tennis.kata.GameSetMatch.domain.Player;
+import com.jsomsouk.tennis.kata.GameSetMatch.domain.repository.ScoreboardRepository;
+import com.jsomsouk.tennis.kata.GameSetMatch.domain.model.Game;
+import com.jsomsouk.tennis.kata.GameSetMatch.domain.model.Player;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

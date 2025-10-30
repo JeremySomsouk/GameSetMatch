@@ -5,7 +5,7 @@ import com.jsomsouk.tennis.kata.GameSetMatch.application.GameService;
 import com.jsomsouk.tennis.kata.GameSetMatch.application.dto.GameDto;
 import com.jsomsouk.tennis.kata.GameSetMatch.application.dto.PlayRequest;
 import com.jsomsouk.tennis.kata.GameSetMatch.application.dto.ScoreResponse;
-import com.jsomsouk.tennis.kata.GameSetMatch.domain.Player;
+import com.jsomsouk.tennis.kata.GameSetMatch.domain.model.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

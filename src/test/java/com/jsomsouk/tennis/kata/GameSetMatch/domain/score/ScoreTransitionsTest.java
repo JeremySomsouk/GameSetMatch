@@ -1,5 +1,6 @@
 package com.jsomsouk.tennis.kata.GameSetMatch.domain.score;
 
+import com.jsomsouk.tennis.kata.GameSetMatch.domain.model.score.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

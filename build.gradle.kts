@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.jsomsouk.tennis.kata"
-version = "0.0.1-SNAPSHOT"
+version = "1.0.0"
 description = "Kata demo tennis game"
 
 java {

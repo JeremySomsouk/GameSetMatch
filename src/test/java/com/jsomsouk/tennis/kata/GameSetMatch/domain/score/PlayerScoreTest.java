@@ -1,5 +1,9 @@
 package com.jsomsouk.tennis.kata.GameSetMatch.domain.score;
 
+import com.jsomsouk.tennis.kata.GameSetMatch.domain.model.score.Fifteen;
+import com.jsomsouk.tennis.kata.GameSetMatch.domain.model.score.Forty;
+import com.jsomsouk.tennis.kata.GameSetMatch.domain.model.score.Thirty;
+import com.jsomsouk.tennis.kata.GameSetMatch.domain.model.score.Zero;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
